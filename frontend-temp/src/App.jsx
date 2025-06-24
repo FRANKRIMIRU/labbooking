@@ -7,8 +7,6 @@ import Contact from "./pages/Contact.jsx";
 import Book from "./pages/Book.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
-
 
 function App() {
   return (
@@ -18,38 +16,10 @@ function App() {
         <Routes>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route
-            path="/services"
-            element={
-              <ProtectedRoute>
-                <LabServices />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route
-            path="/book"
-            element={
-              <ProtectedRoute>
-                <Book />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route
-            path="/contact"
-            element={
-              <ProtectedRoute>
-                <Contact />
-              </ProtectedRoute>
-            }
-          ></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/services" element={<LabServices />}></Route>
+          <Route path="/book" element={<Book />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
         </Routes>
         <Footer />
       </Router>

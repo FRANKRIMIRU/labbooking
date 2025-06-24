@@ -1,10 +1,10 @@
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ children }) {
-  const isAuthenticated = false;
+// function ProtectedRoute({ children }) {
+//   const isAuthenticated = false;
 
-  return isAuthenticated? children:<Navigate to="/login"/>
+//   return isAuthenticated? children:<Navigate to="/login"/>
   
-}
+// }
 
-export default ProtectedRoute;
+// export default ProtectedRoute;

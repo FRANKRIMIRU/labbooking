@@ -2,7 +2,7 @@ import heroImage from "../assets/call-us.jpg";
 
 function Contact() {
   return (
-    <section className="relative bg-gray-50">
+    <section className="relative bg-gray-50 ">
       {/* Mobile heading */}
       <div className="block lg:hidden text-center py-6 px-4">
         <h1 className="text-3xl font-bold text-blue-600">
@@ -11,7 +11,7 @@ function Contact() {
       </div>
 
       {/* Image + Overlay for larger screens */}
-      <div className="relative w-full overflow-hidden shadow-md  md:block h-[80vh]">
+      <div className="relative w-full overflow-hidden shadow-md  block h-[80vh] lg:h-[90vh]">
         <img
           src={heroImage}
           alt="Contact Banner"
@@ -24,7 +24,7 @@ function Contact() {
         </div>
 
         {/* Contact Form on Image */}
-        <div className="absolute inset-0 flex justify-center  lg:justify-end p-12 ">
+        <div className="absolute inset-0 flex justify-center  lg:justify-end p-12 h-full ">
           <form className="bg-white max-w-md w-full p-8 rounded shadow-lg space-y-4 ">
             <label className="block text-sm font-medium text-gray-700">
               Name <span className="text-red-500">*</span>
@@ -59,18 +59,7 @@ function Contact() {
         </div>
       </div>
 
-      {/* Contact Details (always visible) */}
-      <div className="py-10 px-4 text-left space-y-2">
-        <p>
-          <strong>Phone:</strong> +254 721 452 881
-        </p>
-        <p>
-          <strong>Email:</strong> rimirufrank@gmail.com
-        </p>
-        <p>
-          <strong>Location:</strong> Nairobi, Kenya
-        </p>
-      </div>
+      
     </section>
   );
 }
