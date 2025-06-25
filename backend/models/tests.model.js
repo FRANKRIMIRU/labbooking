@@ -40,6 +40,6 @@ const testSchema = new mongoose.Schema({
 },
 { timestamps: true }//createdAt,updatedAt
 );
-const Test = mongoose.model('Test', testSchema);
+const Test = mongoose.model('Test', testSchema);//mongoose.model(modelName, schema)
 
 export default Test;
