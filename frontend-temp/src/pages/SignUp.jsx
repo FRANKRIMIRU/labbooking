@@ -1,17 +1,25 @@
 import { useState } from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+
+
 
 function SignUp() {
-  const{name,setName}= useState()
-  const{email,setEmail}= useState()
-  const { password, setPassword } = useState()
-  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   const Submit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/createUser', { name, email, password })
-      .then(res => console.log(res)
-       .catch(err => console.log(err))
-   )
+    axios.post('http://localhost:5000/api/v1/auth/sign-up', { name, email, password })
+      .then(res => {
+        alert(res.data.message)
+        navigate('/login');
+        console.log(res)
+      })
+       .catch(error => console.error('Sign up failed:',error))
+   
 
 }
 
@@ -41,7 +49,9 @@ function SignUp() {
           Password
         </label>
         <input
+          name="password"
           type="password"
+          autoComplete="new-password"
           placeholder="Password"
           className="w-full border px-2 py-3 mb-3 "
           onChange={(e) => setPassword(e.target.value)}
