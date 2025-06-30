@@ -3,9 +3,32 @@ import UserModel from "../models/user.model.js";
 //this is for the logging in and out shenanigans 
 const authRouter = Router();
 
-authRouter.post('/sign-up',async (req, res) => {
+authRouter.post('/sign-up', async (req, res) => {
+  const { name, email, password } = req.body;
   try {
-    const user = await UserModel.create(req.body)
+ 
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({message: 'User already exists with this email'})
+    }
+
+
+
+
+    const user = await UserModel.create({
+      name,
+      email,
+      password,
+    })
+    const token = generateToken(user._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+
     res.status(201).json({message:`welcome ${user.name}`})
   } catch (err) {
     res.status(400).json({ error: err.message })
@@ -20,9 +43,16 @@ authRouter.post('/sign-in', async (req, res) =>{
   if (!user) {
     return res.status(404).json({message:'User not found'})
   }
-  } catch (err) { res.status(500).json({ message: "Servor error", error: err.message }) }
+     const isMatch = (await user.matchPassword(password));
+     if (!isMatch) {
+       res.status(401).json({message:'incorrect password'})
+     }
+   res.status(200).json({message:`welcome back ${user.name}`})
+   }
+   
+   catch (err) { res.status(500).json({ message: "Servor error", error: err.message }) }
 });
 
 
-authRouter.post('/sign-out', (req, res) => res.send({ title: 'Sign out' }));
+authRouter.post('/sign-out', (req, res) => res.clearCookie("token").status(200).json({message:"Signed out"}));
 export default authRouter;

@@ -11,12 +11,19 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:5000/api/v1/auth/sign-in", { email, password })
-      .then(res => {
+    axios
+      .post(
+        "http://localhost:5000/api/v1/auth/sign-in",
+        { email, password },
+        { withCredentials: true }
+      )
+      .then((res) => {
         alert(res.data.message);
-        navigate('/')
+        navigate("/");
       })
-    .catch(err => ({error:err.message}))
+      .catch((err) => {
+        console.error(err.message);
+      });
   }
 
 

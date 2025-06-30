@@ -12,13 +12,18 @@ function SignUp() {
 
   const Submit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/v1/auth/sign-up', { name, email, password })
-      .then(res => {
-        alert(res.data.message)
-        navigate('/login');
-        console.log(res)
+    axios
+      .post(
+        "http://localhost:5000/api/v1/auth/sign-up",
+        { name, email, password },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        alert(res.data.message);
+        navigate("/login");
+        console.log(res);
       })
-       .catch(error => console.error('Sign up failed:',error))
+      .catch((error) => console.error("Sign up failed:", error));
    
 
 }
