@@ -9,7 +9,7 @@ function Book() {
           <input
             type="text"
             placeholder="Full Name"
-            classNamea="w-full border border-gray-300 p-3 rounded"
+            className="w-full border border-gray-300 p-3 rounded"
           />
           <input
             type="email"

@@ -14,8 +14,6 @@ authRouter.post('/sign-up', async (req, res) => {
     }
 
 
-
-
     const user = await UserModel.create({
       name,
       email,
