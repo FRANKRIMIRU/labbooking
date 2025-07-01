@@ -16,10 +16,9 @@ function SignUp() {
       .post(
         "http://localhost:5000/api/v1/auth/sign-up",
         { name, email, password },
-        { withCredentials: true }
+       {withCredentials:true}
       )
       .then((res) => {
-        alert(res.data.message);
         navigate("/login");
         console.log(res);
       })
@@ -61,7 +60,7 @@ function SignUp() {
           className="w-full border px-2 py-3 mb-3 "
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="w-full border px-2 py-3 bg-blue-600 text-white  ">Submit</button>
+        <button className="w-full border px-2 py-3 bg-blue-600 text-white hover:cursor-pointer  ">Submit</button>
       </form>
     </>
   );

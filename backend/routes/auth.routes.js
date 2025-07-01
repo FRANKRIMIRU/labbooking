@@ -1,5 +1,6 @@
 import { Router } from "express";
 import UserModel from "../models/user.model.js";
+import generateToken from "../utils/generateToken.js";
 //this is for the logging in and out shenanigans 
 const authRouter = Router();
 
@@ -45,7 +46,7 @@ authRouter.post('/sign-in', async (req, res) =>{
   }
      const isMatch = (await user.matchPassword(password));
      if (!isMatch) {
-       res.status(401).json({message:'incorrect password'})
+      return res.status(401).json({message:'incorrect password'})
      }
    res.status(200).json({message:`welcome back ${user.name}`})
    }
