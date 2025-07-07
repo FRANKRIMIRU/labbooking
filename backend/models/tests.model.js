@@ -16,7 +16,7 @@ const testSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["Blood", "COVID-19", "Urine", "General", "Other"],
+    enum: ["Blood", "COVID-19", "Urine", "General", "Other"],//
     default: "General",
   },
   available: {
