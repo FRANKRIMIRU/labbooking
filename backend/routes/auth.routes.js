@@ -49,7 +49,7 @@ authRouter.post('/sign-in', async (req, res) =>{
    res.status(200).json({message:`welcome back ${user.name}`})
    }
    
-   catch (err) { res.status(500).json({ message: "Servor error", error: err.message }) }
+   catch (err) { res.status(500).json({ message: "Server error", error: err.message }) }
 });
 
 

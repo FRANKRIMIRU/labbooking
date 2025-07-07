@@ -5,6 +5,7 @@ import authRouter from './routes/auth.routes.js';
 import userRouter from './routes/user.routes.js';
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
+import testRouter from './routes/test.routes.js';
 
 dotenv.config();
 const app = express();
@@ -18,7 +19,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended:false}))
 
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/users',userRouter)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/tests',testRouter)
 
 
 app.get("/", (req, res) => {
