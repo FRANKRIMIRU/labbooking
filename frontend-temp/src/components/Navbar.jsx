@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 function Navbar() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const location = useLocation();
+
   return (
     <nav className="bg-white shadow-md p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -25,7 +29,14 @@ function Navbar() {
               Contact
             </Link>
           </li>
-        
+          {/* ✅ Show Admin Dashboard only if user is admin */}
+          {user?.role === "admin" &&
+            location.pathname ===
+              "/" && (
+                <li>
+                  <Link to="/admin-dashboard">Admin dashboard</Link>
+                </li>
+              )}
         </ul>
       </div>
     </nav>

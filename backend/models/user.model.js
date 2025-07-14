@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     required: [true, 'User Password is required'],
     minLength: 5,
     maxLength:50
+  },
+  role: {
+    type: String,
+    enum: ["admin", "client"],
+    default:"client"
   }
 },
   { timestamps: true })

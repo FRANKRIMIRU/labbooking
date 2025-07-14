@@ -18,6 +18,7 @@ function Login() {
         { withCredentials: true }
       )
       .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         alert(res.data.message);
         navigate("/");
       })

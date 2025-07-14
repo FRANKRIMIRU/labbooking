@@ -1,6 +1,7 @@
 import { Router } from "express";
 import Test from "../models/tests.model.js";
 import { verifyToken } from "../utils/verifyToken.js";
+import { verifyAdmin } from "./verifyAdmin.js";
 
 const testRouter = Router();
 
@@ -24,9 +25,9 @@ testRouter.get('/:id', async (req, res) => {
 
 });
 
-testRouter.post('/',verifyToken, async(req, res) => {
+testRouter.post('/',verifyToken,verifyAdmin, async(req, res) => {
   try {
-    const test = await Test.create({ ...req.body, createdBy: req.user.id });
+    const test = await Test.create({ ...req.body, createdBy: req.user._id });
     res.status(201).json(test);
   } catch (err) {
     res.status(400).json({message:"Failed to create test",error:err.message})
@@ -34,7 +35,7 @@ testRouter.post('/',verifyToken, async(req, res) => {
 });
 
 
-testRouter.put('/:id',verifyToken, async (req, res) => {
+testRouter.put('/:id',verifyToken, verifyAdmin,async (req, res) => {
   try {
     const updatedTest = await Test.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -48,7 +49,7 @@ testRouter.put('/:id',verifyToken, async (req, res) => {
 });
 
 
-testRouter.delete('/:id',verifyToken,async (req, res) => {
+testRouter.delete('/:id',verifyToken,verifyAdmin, async (req, res) => {
   try {
     const deletedTest = await Test.findByIdAndDelete(req.params.id);
     if (!deletedTest) return res.status(404).json({ message: "Test was not found" });

@@ -8,6 +8,8 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [adminCode, setAdminCode] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const Submit = (e) => {
@@ -15,11 +17,12 @@ function SignUp() {
     axios
       .post(
         "http://localhost:5000/api/v1/auth/sign-up",
-        { name, email, password },
+        { name, email, password,adminCode: isAdmin? adminCode :undefined, },
        {withCredentials:true}
       )
       .then((res) => {
-        navigate("/login");
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("/");
         console.log(res);
       })
       .catch((error) => console.error("Sign up failed:", error));
@@ -60,7 +63,29 @@ function SignUp() {
           className="w-full border px-2 py-3 mb-3 "
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="w-full border px-2 py-3 bg-blue-600 text-white hover:cursor-pointer  ">Submit</button>
+
+        <label className="block">
+          <input
+            type="checkbox"
+            checked={isAdmin}
+            onChange={(e) => setIsAdmin(e.target.checked)}
+            className="mr-2"
+          />
+          Are you an admin?
+        </label>
+
+        {isAdmin && (
+          <input
+            type="text"
+            placeholder="Enter Admin Code"
+            value={adminCode}
+            onChange={(e) => setAdminCode(e.target.value)}
+            className="border p-2 w-full"
+          />
+        )}
+        <button className="w-full border px-2 py-3 bg-blue-600 text-white hover:cursor-pointer  ">
+          Submit
+        </button>
       </form>
     </>
   );
