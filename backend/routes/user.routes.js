@@ -1,4 +1,5 @@
 import { Router } from "express";
+import UserModel from "../models/user.model.js"
 
 //this is for  managing users: CRUD
 const userRouter = Router()
