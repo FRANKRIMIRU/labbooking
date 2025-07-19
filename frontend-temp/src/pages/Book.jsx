@@ -16,13 +16,13 @@ const handleSubmit = (e) => {
   axios
     .post("http://localhost:5000/api/v1/bookings", formData)
     .then((res) => {
-      alert("✅ Booking successful!");
       setFormData({ name: "", email: "", date: "", testType: "" });
       console.log(res.data);
+      alert(`Successfully booked! ${formData.name}`)
     })
     .catch((err) => {
       console.error("Booking failed:", err);
-      alert("❌ " + (err.response?.data?.message || "Something went wrong"));
+      
     });
 };
 
@@ -55,7 +55,7 @@ const handleSubmit = (e) => {
               onChange={handleChange}
               className="w-full border border-gray-300 p-3 rounded"
             />
-            <select className="w-full border border-gray-300 p-3 rounded">
+            <select className="w-full border border-gray-300 p-3 rounded"name="testType" onChange={handleChange} >
               <option value="disabled selected">Select test</option>
               <option>Blood Test</option>
               <option>COVID-19 Test</option>

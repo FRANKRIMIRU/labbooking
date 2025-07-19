@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addBookingToCalendar } from "../controllers/calendar.controller.js";
+import { addBookingToCalendar } from "../controller/calendar.controller.js";
 
 const bookingRouter = Router();
 

@@ -12,8 +12,12 @@ oAuth2Client.setCredentials({
 
 const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-export const addBookingToCalendar = async (req, res) => {
+ export const addBookingToCalendar = async (req, res) => {
+
   const { name, email, date, testType } = req.body;
+  if (!name || !email || !date || !testType) {
+  return res.status(400).json({ success: false, message: "All fields are required." });
+}
 
   const event = {
     summary: `Lab Test: ${testType}`,
@@ -26,6 +30,8 @@ export const addBookingToCalendar = async (req, res) => {
       dateTime: new Date(date + "T10:00:00").toISOString(),
       timeZone: "Africa/Nairobi",
     },
+    attendees: [{ email: "rimirufrank@gmail.com" }],
+      colorId: '5'
   };
 
   try {
